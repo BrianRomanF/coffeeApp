@@ -7,6 +7,8 @@ const userRoutes = require("./routes/userRoutes");
 
 
 app.use(express.json()); // Allows JSON request bodies
+app.use(express.urlencoded({ extended: true })); // 🛠️ Fix for Multer to handle files
+app.use(express.static("public")); // Optional: Serve static files if needed
 
 app.get("/", (req, res) => {
   res.send("Welcome to the Coffee Rating API");

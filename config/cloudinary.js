@@ -10,12 +10,14 @@ cloudinary.config({
 
 const storage = new CloudinaryStorage({
   cloudinary,
-  params: {
-    folder: "coffee_ratings", // Folder in Cloudinary
-    allowed_formats: ["jpg", "jpeg", "png"],
-  },
+  params: async (req, file) => ({
+    folder: "coffee_ratings",
+    format: file.mimetype.split("/")[1], // Extract file format
+    public_id: `${Date.now()}-${file.originalname}`,
+  }),
 });
 
 const upload = multer({ storage });
+
 
 module.exports = { upload, cloudinary };
