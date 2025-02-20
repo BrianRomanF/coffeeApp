@@ -1,6 +1,7 @@
 const express = require("express");
 const { upload } = require("../config/cloudinary");
 const protect = require("../middleware/authMiddleware");
+
 const {
   addCoffee,
   getAllCoffees,
@@ -12,7 +13,7 @@ const {
 
 const router = express.Router();
 
-router.post("/", protect, upload.single("image"), addCoffee);
+router.post("/", protect,  upload.single("image"), addCoffee);
 router.get("/", getAllCoffees);
 router.get("/my-coffees", protect, getUserCoffees);
 router.get("/:id", getCoffeeById);

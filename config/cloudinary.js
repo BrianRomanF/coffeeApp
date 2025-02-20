@@ -8,15 +8,9 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-const storage = new CloudinaryStorage({
-  cloudinary,
-  params: async (req, file) => ({
-    folder: "coffee_ratings",
-    format: file.mimetype.split("/")[1], // Extract file format
-    public_id: `${Date.now()}-${file.originalname}`,
-  }),
-});
 
+// Configure Multer Storage (Temporary)
+const storage = multer.memoryStorage(); // Use memory storage instead of disk
 const upload = multer({ storage });
 
 

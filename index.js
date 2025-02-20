@@ -4,6 +4,7 @@ const app = express();
 const connectDB = require("./config/db");
 const coffeeRoutes = require("./routes/coffeeRoutes");
 const userRoutes = require("./routes/userRoutes");
+const errorHandler = require("./middleware/errorMiddleware");
 
 
 app.use(express.json()); // Allows JSON request bodies
@@ -20,7 +21,7 @@ connectDB();
 // Routes
 app.use("/api/coffee", coffeeRoutes);
 app.use("/api/users", userRoutes); 
-
+app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
